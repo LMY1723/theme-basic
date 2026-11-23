@@ -1,0 +1,66 @@
+{
+  "name": "dsh-plan-access-mode",
+  "version": "0.1.0",
+  "description": "Adds a read-only Plan mode to the DeepSeek Harness access-mode dropdown, with plan approval before edits.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "assets",
+    "cordis.patch.yml",
+    "README.md",
+    "NOTICE",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-commands",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "platform": "web"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.0-0 <0.3.0-0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.1.0",
+    "@deepseek-ai/dsh-permission-presets": ">=0.2.0-0 <0.3.0-0",
+    "@deepseek-ai/dsh-plan-mode": ">=0.2.0-0 <0.3.0-0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LMY1723/theme-basic.git",
+    "directory": "packages/dsh-plan-access-mode"
+  },
+  "homepage": "https://github.com/LMY1723/theme-basic/tree/main/packages/dsh-plan-access-mode",
+  "bugs": {
+    "url": "https://github.com/LMY1723/theme-basic/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "plan-mode",
+    "permission",
+    "ui"
+  ]
+}
