@@ -1,0 +1,41 @@
+# dsh-plan-access-mode bundle patch.
+#
+# 1) 给访问模式下拉加一个 plan 预设：只读 + 不批准提权。
+# 2) 禁用官方 ui-permission 行，换成本插件的客户端副本（同款权限菜单 + 灯泡/小字）。
+# 3) 挂载本插件：host 半是计划模式 ↔ 权限预设桥接，client 半是权限菜单副本。
+#
+# defaultPreset 设成 plan：新会话默认进入计划模式。不想这样的话在
+# 设置 → 通用 → 默认权限 里改回“完全权限”即可。
+
+- id: permission
+  name: '@deepseek-ai/dsh-permission-presets'
+  config:
+    presets:
+      read-only:
+        sandbox: read-only
+        approval: ask
+        description: 只读，不能修改文件
+      workspace-write:
+        sandbox: workspace-write
+        approval: ask
+        description: 可改工作区，更宽范围需审批
+      danger-full-access:
+        sandbox: danger-full-access
+        approval: never
+        description: 完全访问，不弹审批
+      plan:
+        sandbox: read-only
+        approval: never
+        name: 计划模式
+        description: 只读调研，先出计划再改
+    defaultPreset: plan
+
+# 官方权限菜单换成插件自带的副本（带 plan 灯泡和小字）。
+- id: ui-permission
+  disabled: true
+
+- insert:
+    - id: plan-access-mode
+      name: 'dsh-plan-access-mode'
+      config:
+        enabled: true
